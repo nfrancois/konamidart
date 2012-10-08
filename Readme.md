@@ -2,7 +2,7 @@
 A Dart implementation for Konami code.
 
 ```
-#import(""package:konami_code/konami_code.dart");
+#import("packages:konami_code/konami_code.dart");
 #import("dart:html");
 
 
