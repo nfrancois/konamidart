@@ -16,4 +16,4 @@ _changeText(){
 }
 ```
 
-Try perform it [here](http://nfrancois.github.com/dartkonami/).
+Try perform it [here](http://nfrancois.github.com/konamidart/).
