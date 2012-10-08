@@ -15,3 +15,5 @@ _changeText(){
   query('#container').text = "Konami code performed !";
 }
 ```
+
+Try perform it [here](http://nfrancois.github.com/dartkonami/).
