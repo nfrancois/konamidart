@@ -1,6 +1,6 @@
-#import("dart:html");
+import "dart:html";
 
-#import('packages/konami_code/konami_code.dart');
+import 'package:konami_code/konami_code.dart';
 
 
 main(){

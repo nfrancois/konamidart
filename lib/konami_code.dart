@@ -1,5 +1,6 @@
-#library('konami_code');
-#import('dart:html');
+library konami_code;
+
+import 'dart:html';
 
 class KonamiCode {
   
