@@ -1,9 +1,9 @@
 #Konami Dart
 A Dart implementation for Konami code.
 
-```
-#import("packages:konami_code/konami_code.dart");
-#import("dart:html");
+```dart
+import "package:konami_code/konami_code.dart";
+import "dart:html";
 
 
 main(){
