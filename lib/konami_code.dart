@@ -5,7 +5,7 @@ import 'dart:html';
 
 KonamiCode _konamiCode;
 
-/// Get access to konami code.
+/// Get access to Konami Code.
 KonamiCode get konamiCode {
   if(_konamiCode == null){
     _konamiCode = new _KonamiCodeImpl();
@@ -38,7 +38,7 @@ abstract class KonamiCode {
 }
 
 /**
- * Konami Code events.
+ * Provides access to Konami Code events listeners.
  */ 
 class KonamiCodeEvents {
  
@@ -54,7 +54,7 @@ class KonamiCodeEvents {
 }
 
 /**
- * Encapsulate all Konami Code listeners
+ * Encapsulate all Konami Code listeners.
  */ 
 class KonamiCodeEventListenerList {
   
@@ -81,7 +81,7 @@ typedef void KonamiCodeListener(KonamiCodeEvent event);
 
 class _KonamiCodeImpl implements KonamiCode {
   
-  /// Konami Code execution
+  /// Konami Code ascii sequence
   static const _KONAMICODE_SEQUENCE = "38384040373937396665";
   
   final KonamiCodeEvents _events;
