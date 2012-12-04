@@ -14,16 +14,31 @@ KonamiCode get konamiCode {
 }
 
 /**
- * Encapsulates Konami code execution by listening keyboard.
+ * A Konami Code event. 
+ */
+class KonamiCodeEvent {
+  
+  final String type;
+  
+  KonamiCodeEvent.performed() : type = "performed";
+  
+  String toString() => type;  
+}
+
+/**
+ * Encapsulates Konami Code execution by listening keyboard.
  */
 abstract class KonamiCode {
 
+  /**
+   * Provide events.
+   */
   KonamiCodeEvents get on;
   
 }
 
 /**
- * Konami code events.
+ * Konami Code events.
  */ 
 class KonamiCodeEvents {
  
@@ -31,43 +46,42 @@ class KonamiCodeEvents {
   
   KonamiCodeEvents() : _onPerformedEvents = new KonamiCodeEventListenerList();
   
+  /**
+   * Call when Konami Code is performed.
+   */
   KonamiCodeEventListenerList get performed => _onPerformedEvents;
  
 }
 
 /**
- * Encapsulate all Konami code listeners
+ * Encapsulate all Konami Code listeners
  */ 
 class KonamiCodeEventListenerList {
   
-  List<KonamiCodeHandler> _listeners; 
+  final Set<KonamiCodeListener> _listeners; 
   
-  KonamiCodeEventListenerList(){
-    _listeners = [];
-  }
+  KonamiCodeEventListenerList() : _listeners = new Set<KonamiCodeListener>();
   
   /**
-   * Add a Konamide code hander to listener list.
+   * Add a Konamide Code listener to listener list.
    */ 
-  add(KonamiCodeHandler handler) {
-    _listeners.add(handler);
-  }
+  add(KonamiCodeListener listener) => _listeners.add(listener);
   
-  _dispatch(){
-    _listeners.forEach((handler) => handler());
-  }
+  remove(KonamiCodeListener listener) => _listeners.remove(listener);
+  
+  _dispatch(KonamiCodeEvent event) => _listeners.forEach((listener) => listener(event));
   
 }
 
 /**
- * Call when Konami code is performed.
+ * Call when Konami Code is performed.
  */ 
-typedef void KonamiCodeHandler();
+typedef void KonamiCodeListener(KonamiCodeEvent event);
 
 
 class _KonamiCodeImpl implements KonamiCode {
   
-  /// Konami code execution
+  /// Konami Code execution
   static const _KONAMICODE_SEQUENCE = "38384040373937396665";
   
   final KonamiCodeEvents _events;
@@ -78,16 +92,14 @@ class _KonamiCodeImpl implements KonamiCode {
     _bind();
   }
   
-  _bind(){
-    window.on.keyDown.add(_onKeyDown);
-  }
+  _bind() => window.on.keyDown.add(_onKeyDown);
   
   _onKeyDown(KeyboardEvent event){
     var keyCode = event.keyCode;
     _lastInputs = _lastInputs.concat(keyCode.toString());
     if(_KONAMICODE_SEQUENCE == _lastInputs){
       _lastInputs = "";
-      on.performed._dispatch();
+      on.performed._dispatch(new KonamiCodeEvent.performed());
     } else if(_lastInputs.length > _KONAMICODE_SEQUENCE.length){
       _lastInputs = _lastInputs.substring(_lastInputs.length-_KONAMICODE_SEQUENCE.length);
     }
