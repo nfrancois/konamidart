@@ -12,9 +12,9 @@ import "dart:html";
 import 'package:konami_code/konami_code.dart';
 
 main(){
-  konamiCode.on.performed.add(_changeText);
+  konamiCode.onPerformed = _changeText;
 }
 
-_changeText(KonamiCodeEvent event){
+_changeText(){
   query('#container').text = "Konami code performed !";
 }
