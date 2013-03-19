@@ -1,0 +1,24 @@
+.konami {
+	width: 400px;
+}
+.out {
+  visibility: hidden;
+  opacity: 0;  
+}
+
+#github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.in {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 2s ease;
+  -moz-transition: opacity 2s ease;
+  -o-transition: opacity 2s ease;
+  -ms-transition: opacity 2s ease;
+  transition: opacity 2s ease;
+}
