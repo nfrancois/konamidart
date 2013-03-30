@@ -35,7 +35,7 @@ class KonamiCode {
   
   _onKeyDown(KeyboardEvent event){
     var keyCode = event.keyCode;
-    _lastInputs = _lastInputs.concat(keyCode.toString());
+    _lastInputs = _lastInputs + keyCode.toString();
     if(KONAMICODE_SEQUENCE == _lastInputs){
       _lastInputs = "";
       if(_onPerformedCallback != null){

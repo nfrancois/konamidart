@@ -1,4 +1,4 @@
-import "lib/konami_code.dart";
+import "package:konami_code/konami_code.dart";
 import "dart:html";
 
 
@@ -13,5 +13,3 @@ onSuccess() {
 }
 
 Element get success => query("#success");
-
-
