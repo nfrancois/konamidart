@@ -1,5 +1,6 @@
-#import("lib/konami_code.dart");
-#import('dart:html');
+import "lib/konami_code.dart";
+import "dart:html";
+
 
 void main() {
   var konami = new KonamiCode();

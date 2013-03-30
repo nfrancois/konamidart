@@ -1,16 +1,36 @@
-#library('konami_code');
-#import('dart:html');
+/*
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * @nicofrancois wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy me a beer in return Nicolas François
+ * ----------------------------------------------------------------------------
+ */
+library konami_code;
+
+import 'dart:html';
+
+KonamiCode _konamiCode;
+
+/// Get access to Konami Code.
+KonamiCode get konamiCode {
+  if(_konamiCode == null){
+    _konamiCode = new KonamiCode();
+  }
+  return _konamiCode;
+}
+
 
 class KonamiCode {
   
-  const String KONAMICODE_SEQUENCE = "38384040373937396665";
+  const KONAMICODE_SEQUENCE = "38384040373937396665";
   
   var _onPerformedCallback;
   String _lastInputs;
   
   KonamiCode(){
     _lastInputs = "";
-    window.on.keyDown.add(_onKeyDown);
+    window.onKeyDown.listen(_onKeyDown);
   }
   
   _onKeyDown(KeyboardEvent event){
@@ -26,7 +46,7 @@ class KonamiCode {
     }
   }
   
-  void set onPerformed(callback()) {
+  set onPerformed(callback()) {
     _onPerformedCallback = callback;
   }
   
