@@ -5,4 +5,5 @@ author: Nicolas Francois @nicofrancois
 homepage: https://github.com/nfrancois/KonamiDart
 dependencies:
   browser: any
+dev_dependencies:
   unittest: any
