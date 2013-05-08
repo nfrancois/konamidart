@@ -1,9 +1,9 @@
 name: konami_code
 version: 1.2.0
+author: Nicolas Francois  <nicolas.franc@gmail.com>
 description: A Dart implementation for Konami code.
-author: Nicolas Francois @nicofrancois
 homepage: https://github.com/nfrancois/KonamiDart
 dependencies:
-  browser: any
+  browser: '>=0.5.5'
 dev_dependencies:
   unittest: any
