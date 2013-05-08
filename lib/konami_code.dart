@@ -11,8 +11,6 @@ library konami_code;
 import 'dart:html';
 import 'dart:async';
 
-KonamiCode _konamiCode;
-
 /**
  * Give a konami code entry.
  */
@@ -23,32 +21,49 @@ KonamiCode get konamiCode => new KonamiCode();
  */
 class KonamiCode {
   
-  const KONAMICODE_SEQUENCE = "38384040373937396665";
-  
+  final String sequence;
   final List<StreamController> _controllers = [];
   String _lastInputs;
   
-  KonamiCode(){
+  /**
+   * KonamiCode constructor.
+   * [sequenceCode] default value is Konami Code
+   */
+  // 38384040373937396665 is konami code sequence
+  KonamiCode({String sequenceCode : "38384040373937396665"}) : sequence = sequenceCode {
+    _init();
+  }
+  
+  /**
+   * KonamiCode named constructor from char codes.
+   * [charCodes] ascii codes.
+   */  
+  KonamiCode.fromCharCodes(List<int> charCodes){
+    sequence = new String.fromCharCodes(charCodes);
+    _init();
+  }
+  
+  _init(){
     _lastInputs = "";
-    window.onKeyDown.listen(_onKeyDown);
+    window.onKeyDown.listen(_onKeyDown);    
   }
   
   _onKeyDown(KeyboardEvent event){
     var keyCode = event.keyCode;
     _lastInputs = _lastInputs + keyCode.toString();
-    if(KONAMICODE_SEQUENCE == _lastInputs){
+    if(sequence == _lastInputs){
+      _controllers.forEach((controller) => controller.add(_lastInputs));
       _lastInputs = "";
-      _controllers.forEach((controller) => controller.add(true));
-    } else if(_lastInputs.length > KONAMICODE_SEQUENCE.length){
-      _lastInputs = _lastInputs.substring(_lastInputs.length-KONAMICODE_SEQUENCE.length);
+    } else if(_lastInputs.length > sequence.length){
+      _lastInputs = _lastInputs.substring(_lastInputs.length-sequence.length);
     }
   }
   
   /**
    * When sequence is performed.
    */
-  Stream<bool> get onPerformed {
-    StreamController<bool> controller = new StreamController();
+  Stream<String> get onPerformed {
+    StreamController<String> controller = new StreamController();
     _controllers.add(controller);
     return controller.stream;
   }
