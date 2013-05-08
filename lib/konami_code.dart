@@ -9,23 +9,23 @@
 library konami_code;
 
 import 'dart:html';
+import 'dart:async';
 
 KonamiCode _konamiCode;
 
-/// Get access to Konami Code.
-KonamiCode get konamiCode {
-  if(_konamiCode == null){
-    _konamiCode = new KonamiCode();
-  }
-  return _konamiCode;
-}
+/**
+ * Give a konami code entry.
+ */
+KonamiCode get konamiCode => new KonamiCode();
 
-
+/**
+ * Manage konami code execution.
+ */
 class KonamiCode {
   
   const KONAMICODE_SEQUENCE = "38384040373937396665";
   
-  var _onPerformedCallback;
+  final List<StreamController> _controllers = [];
   String _lastInputs;
   
   KonamiCode(){
@@ -38,16 +38,19 @@ class KonamiCode {
     _lastInputs = _lastInputs + keyCode.toString();
     if(KONAMICODE_SEQUENCE == _lastInputs){
       _lastInputs = "";
-      if(_onPerformedCallback != null){
-        _onPerformedCallback();        
-      }
+      _controllers.forEach((controller) => controller.add(true));
     } else if(_lastInputs.length > KONAMICODE_SEQUENCE.length){
       _lastInputs = _lastInputs.substring(_lastInputs.length-KONAMICODE_SEQUENCE.length);
     }
   }
   
-  set onPerformed(callback()) {
-    _onPerformedCallback = callback;
+  /**
+   * When sequence is performed.
+   */
+  Stream<bool> get onPerformed {
+    StreamController<bool> controller = new StreamController();
+    _controllers.add(controller);
+    return controller.stream;
   }
   
 }

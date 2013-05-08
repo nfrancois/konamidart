@@ -4,7 +4,7 @@ import "dart:html";
 
 void main() {
   var konami = new KonamiCode();
-  konami.onPerformed = onSuccess;
+  konami.onPerformed.listen((_) => onSuccess());
 }
 
 onSuccess() {
