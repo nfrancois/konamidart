@@ -24,9 +24,9 @@ Stream give code sequence as string.
 
 Want to use your own code ?
 
-```dart`
+```dart
 // Up Up !
 new KonamiCode("3838").onPerformed.listen((_) => doSomething());
 // Down down !
-new KonamiCode.fromCharCodes([40,4]").onPerformed.listen((_) => doSomething());
-``
+new KonamiCode.fromCharCodes([40,40]).onPerformed.listen((_) => doSomething());
+```
