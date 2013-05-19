@@ -38,8 +38,7 @@ class KonamiCode {
    * KonamiCode named constructor from char codes.
    * [charCodes] ascii codes.
    */  
-  KonamiCode.fromCharCodes(List<int> charCodes){
-    sequence = new String.fromCharCodes(charCodes);
+  KonamiCode.fromCharCodes(List<int> charCodes) : sequence = new String.fromCharCodes(charCodes) {
     _init();
   }
   
