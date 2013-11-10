@@ -19,4 +19,4 @@ onSuccess() =>
   success.classes..remove("out")
                  ..add("in");
 
-Element get success => query("#success");
+Element get success => querySelector("#success");
